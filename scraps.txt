@@ -1,0 +1,90 @@
+PING_DOPING
+	PRINT CG_CLR,CG_WHT,"pING ip",13,"eNTER THE ip TO PING:",13
+	;get ip address to ping
+	jsr getip
+	;verify
+	jsr prns
+	dc.b 13,0
+	lda #<gotip
+	ldx #>gotip
+	jsr printip
+	PRINT ", "
+	jsr yesno
+	beq PING_DOPING
+	cmp #$01
+	beq MPING_a
+	cmp #$02
+	bne MPING_a
+MPING_xx
+	jmp MPING_x
+MPING_a
+	;copy gotip into pingip
+	lda gotip
+	sta PING_IP
+	lda gotip+1
+	sta PING_IP+1
+	lda gotip+2
+	sta PING_IP+2
+	lda gotip+3
+	sta PING_IP+3
+	;get number of pings to send
+	PRINT 13,"hOW MANY PINGS? "
+	jsr getnum
+	sta pingcount
+	;ARP request the MAC for it
+	PRINT 13,"press any key to abort",13
+MPING_f
+	PRINT 13,"pINGING "
+	lda #<PING_IP
+	ldx #>PING_IP
+	jsr printip
+	PRINT 13
+	
+	jsr PING_PING
+
+	lda #$00
+	sta TIMEOUT
+	lda $dc08
+	sta TICKER
+MPING_g
+	jsr GETIN      ;key hit?
+	beq MPING_ga
+	jmp MPING_x
+MPING_ga
+	lda PING_STATE ;IF PING_STATE has returned to 0 
+	beq MPING_b  
+	cmp #$03
+	beq MPING_ba
+	lda $dc08
+	cmp TICKER ;Ticked?
+	beq MPING_g ;if not, loop
+	sta TICKER
+	
+	inc TIMEOUT
+	lda TIMEOUT
+	cmp #10     ;TImed out?
+	bne MPING_g
+	PRINT 13,"nO rESPONSE",13
+	jsr getanykey
+	jmp MPING_h
+MPING_b
+	PRINT 13,"ping REPLY RECEIVED",13
+	jmp MPING_h
+MPING_ba
+	PRINT 13,"dESTINATION hOST uNREACHABLE",13
+MPING_h
+
+	lda $dc08
+	sta TICKER
+MPING_ha
+	lda $dc08
+	cmp TICKER
+	beq MPING_ha
+	
+	dec pingcount
+	beq MPING_xa
+	jmp MPING_f
+MPING_xa
+	jsr getanykey
+MPING_x
+	rts

@@ -1,0 +1,13 @@
+;CACHES
+
+;ARP CACHE HOLDS 10 entries
+
+ARP_CACHE
+ARP_CACHE_MAC	ds.b 60,0
+ARP_CACHE_IP	ds.b 40,0
+
+DNS_CACHE
+;DNS CACHE HOLDS 10 entries of 40 char max
+DNS_CACHE_NAME	ds.b 400,0
+DNS_CACHE_IP    ds.b 40,0
+

@@ -1,0 +1,27 @@
+
+Bugs
+----
+-Some invalid IPs (>255) aren't detected
+
+Todo
+----
+-Wind needs tweaking
+
+Items that could be added for fanciness
+---------------------------------------
+-Random terrain + tank locations
+-Address Book
+-Destroy terrain
+
+Done or not needed
+------------------
+-More robust chat input - done!
+-Better IP input routine - done!
+-DHCP - doesn't make sense since you need to point NAT to a specific IP
+
+Fixed bugs
+----------
+-Chat bug when receiving and it's your turn
+-Receiver sometimes detonates immediately with "Missed" (no delay) - fixed?
+-Race condition with Health packets FIXED! But if screen turns blue, CTRL rescues
+-Has to always contact gateway on startup - fixed
