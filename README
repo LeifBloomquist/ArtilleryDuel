@@ -1,0 +1,35 @@
+Artillery Duel Network - The very first networked game for the Commodore 64 with Ethernet cartridge.
+
+Supports any CS8900-based cart with the RR-Net mappings (RR-Net, FB-Net, 64NIC+, etc.)  Should also work on the ETH64 but we never tried it.
+
+Initially, this was going to be a clone of "Weather War", and you'll see that reflected in the documentation especially.  Still, we stuck with a lot of the same overall game logic and protocol.  
+
+HUGE THANKS to Oliver "Six" VieBrooks for writing netlib64, and allowing me to include (slightly hacked) parts of it here in its unfinished, yet functional, state.  I also made liberal use of his many clever DASM macros.
+
+==================================================
+
+As presented here, this is targeted for building on Windows.  DASM (dasm.exe) from http://dasm-dillon.sourceforge.net/ is provided to get you started quickly.  Just type 'make' [1].  Should be pretty easy to build under Linux or any other platform that DASM runs on though. 
+
+The output file is prefixed by a ! to flag it as the main loader file on an IDE64.  This is optional.
+
+==================================================
+
+Thanks:
+
+NETWORK CODE: Again, Oliver "Six" VieBrooks, without whom this game wouldn't have been possible at all.
+
+CODE TIPS: Robin Harbron
+
+MUSIC: "Eve of War" by Raik Picheta  
+
+PLAYTESTERS: Robin Harbron and Thurstan Johnston
+
+Plus I borrowed bits of code from others, see the source, I tried to document very instance.
+
+==================================================
+
+Issues:  See TODO.txt  
+
+==================================================
+
+[1] Not a real makefile by any stretch of the imagination!  
